@@ -1,44 +1,1 @@
-import torch
-import numpy as np
-# def a Longtensor
-a= torch.LongTensor([[2,3],[4,8],[7,9]])
-
-print("a is :{}".format(a))
-print("a size is {}".format(a.size()))
-
-b= torch.LongTensor([[2,3],[4,8],[7,9]])
-
-print("b is :{}".format(b))
-print("b size is {}".format(b.size()))
-
-c=torch.zeros((3,2))
-
-print('zero tensor:{}'.format(c))
-
-d=torch.randn((3,2))
-
-print("normal randon is :{}".format(d))
-
-print("a is :{}".format(a))
-
-a[0,1]=100
-
-print("a changed value is :{}".format(a))
-
-nummpy_b=a.numpy()
-
-print('convert to numpy is \n {}'.format(nummpy_b))
-
-e=np.array([[2,3],[4,5]])
-torch_e=torch.from_numpy(e)
-
-print("from numpy to torch.Tensor is {}".format(torch_e))
-
-f_torch_e=torch_e.float()
-
-print('change data type tp float tensor:{}'.format(f_torch_e))
-
-if torch.cuda.is_available():  # Judge the pc whether support cuda.
-    a_cuda=a.cuda()
-    print(a_cuda)
-
+import torchimport numpy as npfrom torch.autograd import Variable# def a Longtensora= torch.LongTensor([[2,3],[4,8],[7,9]])print("a is :{}".format(a))print("a size is {}".format(a.size()))b= torch.LongTensor([[2,3],[4,8],[7,9]])print("b is :{}".format(b))print("b size is {}".format(b.size()))c=torch.zeros((3,2))print('zero tensor:{}'.format(c))d=torch.randn((3,2))print("normal randon is :{}".format(d))print("a is :{}".format(a))a[0,1]=100print("a changed value is :{}".format(a))nummpy_b=a.numpy()print('convert to numpy is \n {}'.format(nummpy_b))e=np.array([[2,3],[4,5]])torch_e=torch.from_numpy(e)print("from numpy to torch.Tensor is {}".format(torch_e))f_torch_e=torch_e.float()print('change data type tp float tensor:{}'.format(f_torch_e))if torch.cuda.is_available():  # Judge the pc whether support cuda.    a_cuda=a.cuda()    print(a_cuda)    print(Variable(a_cuda)) # convert the Tensor to Variable# Create Variablex=Variable(torch.FloatTensor([1]),requires_grad=True)w=Variable(torch.FloatTensor([2]),requires_grad=True)b=Variable(torch.FloatTensor([3]),requires_grad=True)# Buid a computational graphy=w*x+b # y=2*x+3#Compute gradientsy.backward() #same as y.backward(torch.FloatTensor([1]))#print out the gradientsprint(x.grad) # x.grad=2print(w.grad) # w.grad=1print(b.grad) # b.grad=1x=torch.randn(3)print(x)x=Variable(x,requires_grad=True)print(x)y=x*2print(y)y.backward(torch.FloatTensor([1,0.1,0.01]))print(x.grad)
